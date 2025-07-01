@@ -1,0 +1,32 @@
+name: Auto Sign-in for BBS
+
+on:
+  schedule:
+    - cron: '15 23 * * *'  # 每天上午8点运行
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  sign_in_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install requests
+
+      - name: Run sign-in script
+        env:
+          WX_PHONE: ${{ secrets.WX_PHONE }}
+          WX_PASS: ${{ secrets.WX_PASS }}
+          WX_CORPID: ${{ secrets.WX_CORPID }}
+          WX_SECRET: ${{ secrets.WX_SECRET }}
+          WX_AGENTID: ${{ secrets.WX_AGENTID }}
+        run: python wechat_steps_auto.py  # 脚本名
