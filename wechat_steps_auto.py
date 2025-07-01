@@ -51,13 +51,13 @@ def daily_task():
     logging.info("开始执行微信步数提交任务...")
 
     # 从环境变量获取配置
-    username = get_env_or_default("WX_PHONE") or "15559039068"
-    password = get_env_or_default("WX_PASS") or "cattle3213505"
+    username = get_env_or_default("WX_PHONE") or ""
+    password = get_env_or_default("WX_PASS") or ""
     steps = get_env_or_default("WX_STEPS", None, int)
 
-    corpid = get_env_or_default("WX_CORPID") or "ww3f27d938d39d2801"
-    corpsecret = get_env_or_default("WX_SECRET") or "Qecy2ITn0KiFjg4qP09cKCFxfhsaUsDDa3BkLES9KyA"
-    agentid = get_env_or_default("WX_AGENTID") or "1000003"
+    corpid = get_env_or_default("WX_CORPID") or ""
+    corpsecret = get_env_or_default("WX_SECRET") or ""
+    agentid = get_env_or_default("WX_AGENTID") or ""
 
     if not all([username, password, corpid, corpsecret, agentid]):
         print("❌ 缺少必要的环境变量，请检查 WX_PHONE / WX_PASS / WX_CORPID / WX_SECRET / WX_AGENTID 是否设置")
