@@ -3,7 +3,6 @@ import logging
 import random
 import time
 import os
-from datetime import datetime
 from wx_msg import send_wx  # 企业微信推送函数
 
 # 设置日志格式
@@ -51,13 +50,13 @@ def daily_task():
     logging.info("开始执行微信步数提交任务...")
 
     # 从环境变量获取配置
-    username = get_env_or_default("WX_PHONE") or ""
-    password = get_env_or_default("WX_PASS") or ""
+    username = get_env_or_default("WX_PHONE") or "15559039068"
+    password = get_env_or_default("WX_PASS") or "cattle3213505"
     steps = get_env_or_default("WX_STEPS", None, int)
 
-    corpid = get_env_or_default("WX_CORPID") or ""
-    corpsecret = get_env_or_default("WX_SECRET") or ""
-    agentid = get_env_or_default("WX_AGENTID") or ""
+    corpid = get_env_or_default("WX_CORPID") or "ww3f27d938d39d2801"
+    corpsecret = get_env_or_default("WX_SECRET") or "Qecy2ITn0KiFjg4qP09cKCFxfhsaUsDDa3BkLES9KyA"
+    agentid = get_env_or_default("WX_AGENTID") or "1000003"
 
     if not all([username, password, corpid, corpsecret, agentid]):
         print("❌ 缺少必要的环境变量，请检查 WX_PHONE / WX_PASS / WX_CORPID / WX_SECRET / WX_AGENTID 是否设置")
@@ -67,8 +66,7 @@ def daily_task():
     success, msg, _ = submit_wechat_steps(username, password, steps)
 
     # 2. 构造并推送消息
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    full_msg = f"[微信步数刷步通知]\n时间：{now}\n{msg}"
+    full_msg = f"[微信步数刷步通知]\n{msg}"
     print(full_msg)
     send_wx(full_msg, corpid, corpsecret, agentid)
 
