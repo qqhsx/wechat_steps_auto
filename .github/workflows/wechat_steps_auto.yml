@@ -2,7 +2,7 @@ name: Auto Sign-in for BBS
 
 on:
   schedule:
-    - cron: '15 23 * * *'  # 每天上午8点运行
+    - cron: '15 11 * * *'  # 每天上午8点运行
   workflow_dispatch:  # 允许手动触发
 
 jobs:
